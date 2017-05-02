@@ -1,6 +1,6 @@
 {
-"1":"Hallo, Ich bin ein Bot und heiße Tribotum und kann dich bei der Steuererklärung unterstützen.",
-"2":"Wie ist dein Vorname?",
-"3":"Wie ist dein Name?",
-"4":"Nenne mir bitte deine Finanznummer"
+"1":{"question":"Hallo, Ich bin Tribotum und kann dich bei der Steuererklärung unterstützen. Wenn du anfangen willst sag ja.","follower":2,"condition":true},
+"2":{"question":"Wie ist dein Vorname?","follower":3", condition":true},
+"3":{"question":"Wie ist dein Name?","follower":4", condition":true},
+"4":{"question":"Nenne mir bitte deine Finanznummer","follower":0, "condition":true}
 }

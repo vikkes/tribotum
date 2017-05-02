@@ -56,16 +56,16 @@ restService.get('/tribotum/question', function(req, res) {
         if (err) {
             
             return res.json({
-                id: err,
+                err,
                 source: 'question_err'
             });
         }
         var obj = JSON.parse(data)
-        console.log(obj);
         
+        var tempObj=obj[num];
+        console.log(tempObj);
         return res.json({
-            id: obj,
-            source: 'question'
+            tempObj
         });
 
     });
@@ -77,3 +77,5 @@ restService.get('/tribotum/question', function(req, res) {
 restService.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");
 });
+
+//TODO: codnitional request
