@@ -6,7 +6,7 @@ const uuidV1 = require('uuid/v1');
 const fs = require("fs");
 
 const restService = express();
-var log = "";
+var log = {};
 var obj = {};
 
 restService.use(bodyParser.urlencoded({
@@ -19,8 +19,19 @@ restService.post('/tribotum/answer', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var speech = req.body.answer ? req.body.answer : "none";
     var qId = req.body.qId ? req.body.qId : 0;
+    var uId = req.body.uId;
     var answerExpected = obj[qId]["condition"]["answer"];
+    var tag = obj[qId]["tag"];
     var qIdNext;
+    
+    console.log(uId+ " : "+ tag);
+    if(tag=="init"){
+      log[uId]={};
+    }else
+    {
+      log[uId][tag]=speech;  
+    }
+    console.log(log);
     
     
 
@@ -55,7 +66,7 @@ restService.get('/tribotum/newuser', function(req, res) {
 
 restService.get('/tribotum/question', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    var num = req.query.num ? req.query.num : 1
+    var num = req.query.num ? req.query.num : 1;
     fs.readFile('/home/ubuntu/workspace/bot/data/questions.json', 'utf8', function(err, data) {
         if (err) {
             return res.json({
