@@ -24,14 +24,14 @@ restService.post('/tribotum/answer', function(req, res) {
     var tag = obj[qId]["tag"];
     var qIdNext;
     
-    console.log(uId+ " : "+ tag);
+    //console.log(uId+ " : "+ tag);
     if(tag=="init"){
       log[uId]={};
     }else
     {
       log[uId][tag]=speech;  
     }
-    console.log(log);
+   console.log(log);
     
     
 
@@ -61,6 +61,17 @@ restService.get('/tribotum/newuser', function(req, res) {
     return res.json({
         id: uuid_user,
         source: 'newuser'
+    });
+});
+
+restService.get('/tribotum/log', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    //console.log(req.query);
+    var uuid= req.query.uid ? req.query.uid : 1;
+    var log_data=log[uuid];
+    console.log(log_data)
+    return res.json({
+        log:log_data
     });
 });
 
