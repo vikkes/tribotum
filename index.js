@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const uuidV1 = require('uuid/v1');
 const fs = require("fs");
 
+const dialog = require("./app/dialog.js").dialog;
+
 const restService = express();
 var log = {};
 var obj = {};
@@ -20,39 +22,25 @@ restService.post('/tribotum/answer', function(req, res) {
     var speech = req.body.answer ? req.body.answer : "none";
     var qId = req.body.qId ? req.body.qId : 0;
     var uId = req.body.uId;
+    console.log(qId);
     var answerExpected = obj[qId]["condition"]["answer"];
     var tag = obj[qId]["tag"];
-    var qIdNext;
     
-    //console.log(uId+ " : "+ tag);
-    if(tag=="init"){
-      log[uId]={};
-    }else
-    {
-      log[uId][tag]=speech;  
-    }
-   console.log(log);
-    
-    
-
-    if (answerExpected == speech) {
-        qIdNext = obj[qId]["condition"]["follower"];
-        speech = obj[qIdNext];
-        
-    }
-    else if (answerExpected == "text") {
-        qIdNext = obj[qId]["condition"]["follower"];
-        speech = obj[qIdNext];
-    }
-    else {
-        speech = obj[-1];
-        qIdNext=qId;
-    }
-
-    return res.json({
-        qId:qIdNext,
-        content: speech
+        if(tag=="init"){
+              log[uId]={};
+            }else
+            {
+              log[uId][tag]=speech;  
+            }
+    dialog(qId, answerExpected, speech,obj, function(data){
+        //console.log(data.qIdNext+"+"+data.speech);
+        console.log(JSON.stringify(data))
+        return res.json({
+           qId: data.qId,
+           content: data.speech
+        });
     });
+
 });
 
 restService.get('/tribotum/newuser', function(req, res) {
@@ -67,11 +55,11 @@ restService.get('/tribotum/newuser', function(req, res) {
 restService.get('/tribotum/log', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     //console.log(req.query);
-    var uuid= req.query.uid ? req.query.uid : 1;
-    var log_data=log[uuid];
+    var uuid = req.query.uid ? req.query.uid : 1;
+    var log_data = log[uuid];
     console.log(log_data)
     return res.json({
-        log:log_data
+        log: log_data
     });
 });
 
@@ -98,5 +86,3 @@ restService.get('/tribotum/question', function(req, res) {
 restService.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");
 });
-
-
