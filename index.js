@@ -10,6 +10,7 @@ const dialog = require("./app/dialog.js").dialog;
 const restService = express();
 var log = {};
 var obj = {};
+var commands = {};
 
 restService.use(bodyParser.urlencoded({
     extended: true
@@ -25,19 +26,19 @@ restService.post('/tribotum/answer', function(req, res) {
     console.log(qId);
     var answerExpected = obj[qId]["condition"]["answer"];
     var tag = obj[qId]["tag"];
-    
-        if(tag=="init"){
-              log[uId]={};
-            }else
-            {
-              log[uId][tag]=speech;  
-            }
-    dialog(qId, answerExpected, speech,obj, function(data){
+
+    if (tag == "init") {
+        log[uId] = {};
+    }
+    else {
+        log[uId][tag] = speech;
+    }
+    dialog(qId, answerExpected, speech, obj, commands, function(data) {
         //console.log(data.qIdNext+"+"+data.speech);
         console.log(JSON.stringify(data))
         return res.json({
-           qId: data.qId,
-           content: data.speech
+            qId: data.qId,
+            content: data.speech
         });
     });
 
@@ -46,10 +47,19 @@ restService.post('/tribotum/answer', function(req, res) {
 restService.get('/tribotum/newuser', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var uuid_user = uuidV1();
-    return res.json({
-        id: uuid_user,
-        source: 'newuser'
+    fs.readFile('/home/ubuntu/workspace/bot/data/commands.json', 'utf8', function(err, data) {
+        if (err) {
+
+        }
+
+        commands = JSON.parse(data);
+
+        return res.json({
+            id: uuid_user,
+            source: 'newuser'
+        });
     });
+
 });
 
 restService.get('/tribotum/log', function(req, res) {
@@ -66,6 +76,9 @@ restService.get('/tribotum/log', function(req, res) {
 restService.get('/tribotum/question', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var num = req.query.num ? req.query.num : 1;
+
+
+
     fs.readFile('/home/ubuntu/workspace/bot/data/questions.json', 'utf8', function(err, data) {
         if (err) {
             return res.json({
@@ -81,6 +94,8 @@ restService.get('/tribotum/question', function(req, res) {
             content: tempObj
         });
     });
+
+
 });
 
 restService.listen((process.env.PORT || 8000), function() {

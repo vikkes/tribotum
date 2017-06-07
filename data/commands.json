@@ -1,0 +1,29 @@
+{
+"1":{
+    "name":"home",
+    "question":"Aktiviere Home",
+    "condition": {
+            "follower":2,
+            "answer":"ja"
+        },
+    "tag":"command"    
+    },
+"2":{
+    "name":"umsatz",
+    "question":"Aktiviere Umsatz",
+    "condition" : {
+            "follower":3,
+            "answer":"text"
+        },
+    "tag":"command"      
+    },
+"3":{
+    "name":"einkommen",
+    "question":"Aktiviere Einkommen",
+    "condition": {
+            "follower":4,
+            "answer":"text"
+    },
+    "tag":"command"  
+}
+}
