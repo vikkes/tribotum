@@ -18,6 +18,9 @@ restService.use(bodyParser.urlencoded({
 
 restService.use(bodyParser.json());
 
+
+//TODO:question and answer align
+
 restService.post('/tribotum/answer', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var speech = req.body.answer ? req.body.answer : "none";
@@ -49,11 +52,9 @@ restService.get('/tribotum/newuser', function(req, res) {
     var uuid_user = uuidV1();
     fs.readFile('/home/ubuntu/workspace/bot/data/commands.json', 'utf8', function(err, data) {
         if (err) {
-
+            //TODO:exception handling!!
         }
-
         commands = JSON.parse(data);
-
         return res.json({
             id: uuid_user,
             source: 'newuser'
@@ -67,6 +68,7 @@ restService.get('/tribotum/log', function(req, res) {
     //console.log(req.query);
     var uuid = req.query.uid ? req.query.uid : 1;
     var log_data = log[uuid];
+    //TODO: log data to dbms ,eg.mongo
     console.log(log_data)
     return res.json({
         log: log_data
@@ -76,9 +78,6 @@ restService.get('/tribotum/log', function(req, res) {
 restService.get('/tribotum/question', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var num = req.query.num ? req.query.num : 1;
-
-
-
     fs.readFile('/home/ubuntu/workspace/bot/data/questions.json', 'utf8', function(err, data) {
         if (err) {
             return res.json({
@@ -86,7 +85,6 @@ restService.get('/tribotum/question', function(req, res) {
                 source: 'question_err'
             });
         }
-
         obj = JSON.parse(data);
         var tempObj = obj[num];
         return res.json({
@@ -94,8 +92,6 @@ restService.get('/tribotum/question', function(req, res) {
             content: tempObj
         });
     });
-
-
 });
 
 restService.listen((process.env.PORT || 8000), function() {
