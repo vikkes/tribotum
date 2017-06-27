@@ -45,7 +45,5 @@
          data["speech"]=speech;
          callback(data);
      }
-     
-     
  };
  
