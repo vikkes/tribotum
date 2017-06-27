@@ -3,11 +3,8 @@
         var data={};
         var qIdNext;
         var commands=["DEFAULT","HOME","UMSATZ","EINKOMMEN"];
-
-
-//console.log(answerExpected + "-" + speech)
-
-      
+        
+        
       if (commands.indexOf(speech.toUpperCase())>=0 ){
          qIdNext = commands.indexOf(speech.toUpperCase());
          speech= commands_json[commands.indexOf(speech.toUpperCase())];
