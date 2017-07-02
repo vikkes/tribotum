@@ -1,0 +1,107 @@
+{
+  "2016": {
+    "1": {
+      "1": [
+        {
+          "type": "check",
+          "name": "Einkommensteuererklärung",
+          "format": [
+            "Fett"
+          ],
+          "size": "35%"
+        }
+      ],
+      "2": [
+        {
+          "type": "check",
+          "name": "Antrag auf Festsetzung der Arbeitnehmer-Sparzulage",
+          "format": [
+            "Fett"
+          ],
+          "size": "35%"
+        }
+        ],
+      "3": [
+        {
+          "type": "feld",
+          "name": "Stempel",
+          "format": [
+            "ohne"
+          ],
+          "size": "30%"
+        }
+        ],
+      "type": "zeile",
+      "spalten": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    "2": {
+      "1": [
+        {
+          "type": "check",
+          "name": "Erklärung zur Festsetzung der Kirchensteuer auf Kapitalerträge",
+          "format": [
+            "Fett"
+          ],
+          "size": "35%"
+        }
+      ],
+      "2": [
+        {
+          "type": "check",
+          "name": "Erklärung zur Feststellung des verbleibenden Verlustvortrags",
+          "format": [
+            "Fett"
+          ],
+          "size": "35%"
+        }
+        ],
+      "3": [
+        {
+          "type": "feld",
+          "name": "Stempel",
+          "format": [
+            "ohne"
+          ],
+          "size": "30%"
+        }
+        ],
+      "type": "zeile",
+      "spalten": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    "3": {
+      "1": [
+        {
+          "type": "text",
+          "name": "Steuernummer",
+          "format": [
+            "Fett"
+          ],
+          "size": "70%"
+        }
+      ],
+      "2": [
+        {
+          "type": "feld",
+          "name": "Stempel",
+          "format": [
+            "ohne"
+          ],
+          "size": "30%"
+        }
+        ],
+      "type": "zeile",
+      "spalten": [
+        "1",
+        "2"
+      ]
+    }
+  }
+}
